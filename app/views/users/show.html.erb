@@ -1,0 +1,32 @@
+<h1>users#show</h1>
+<p>名前 : <%= @user.name %></p>
+<p>メールアドレス : <%= @user.email %></p>
+<p>プロフィール : <%= @user.profile %></p>
+
+<% if current_user.id == @user.id %>
+  <%= link_to "編集する", edit_user_registration_path %>
+<% end %>
+
+<h2>ユーザーの投稿一覧</h2>
+<% @user.qols.each do |t| %>
+  <%= t.user.name %>
+  <%= t.food %>
+   <%= t.cost %>
+   <%= t.coupon %>
+   <%= t.place %>
+   <%= t.created_at %>
+<% end %>
+
+<!-- 以下はいいね機能を実装している場合-->
+<h2>ユーザーがいいねした投稿一覧</h2>
+<% @user.liked_qols.each do |t| %>
+  <%= t.user.name %>
+  <%= t.food %>
+   <%= t.cost %>
+   <%= t.coupon %>
+   <%= t.place %>
+   <%= t.created_at %>
+<% end %>
+
+
+<%= link_to "安飯一覧に戻る", qols_path %>

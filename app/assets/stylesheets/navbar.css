@@ -1,0 +1,60 @@
+
+*{
+  margin: 0;
+  padding: 10px;
+}
+
+.nav {
+  display: flex;
+  z-index:9997;
+}
+
+
+
+
+.logo {
+  margin: 0 auto;
+  
+  padding: 10px 20px;
+  display: inline-block;
+}
+
+#scroll {
+  scroll-behavior: smooth;
+}
+
+.nav li {
+  list-style-type: none;
+}
+.nav li + li {
+   border-left: 1px solid #000;
+}
+.nav li a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  padding: 0 20px;
+}
+.nav li a:hover {
+  cursor: pointer;
+}
+
+
+  .trans-rotate:hover {
+    transform: rotate(30deg);
+    }
+
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.clearfix{
+  
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin:  0 auto;
+}
+

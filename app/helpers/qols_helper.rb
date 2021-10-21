@@ -1,0 +1,2 @@
+module QolsHelper
+end

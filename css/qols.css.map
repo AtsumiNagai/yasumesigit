@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../app/assets/stylesheets/qols.scss"
+    ],
+    "names": [],
+    "file": "qols.css"
+}

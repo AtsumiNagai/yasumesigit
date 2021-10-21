@@ -1,0 +1,137 @@
+<div id="loading">
+  <div id="loading_box">
+    <div class="loading-one animation_loading">
+      <p class="loading-txt">ちょっと待って</p>
+    </div>
+  </div>
+</div>
+
+<div class="new-block">
+
+<h3>新規投稿</h3>
+<%= form_for @qol do |f| %>
+  
+  <div class="field">
+      
+      <%= f.file_field :image %>
+  </div>
+
+  
+  <div class="field">
+    <%= f.text_field :food, :size => 30, :placeholder => "お店の名前" %>
+  </div>
+
+  
+
+  <div class="field">
+
+    <%= f.text_field :cost, :size => 30, :placeholder => "値段" %>
+  </div>
+
+
+  <div class="field">
+
+    <%= f.text_field :coupon, :size => 10, :placeholder => "クーポン内容" %>
+  </div>
+
+  <div class="field">
+
+    <%= f.text_field :place, :size => 30, :placeholder => "アクセス" %>
+  </div>
+ 
+  <div class="field">
+
+      <%= f.text_field :address, :size => 50, :placeholder => "住所" %>
+  </div>
+  
+  <div class="field">
+     
+      <%= f.text_field :latitude,:value =>"緯度", id: :lat, :placeholder => "緯度" %>
+  </div>
+
+  <div class="field">
+ 
+      <%= f.text_field :longitude,:value =>"経度", id: :lng, :placeholder => "経度" %>
+  </div>
+
+ 
+ 
+  <div class="field1">
+    <%= f.submit "投稿する！" %>
+  </div>
+
+<% end %>
+
+<h2>Map</h2>
+
+<input id="address" type="textbox" value="GeekSalon">
+<input type="button" value="検索" onclick="codeAddress()">
+<p>マーカーをドラック＆ドロップで位置の調整ができます。<p>
+<div id='map'></div>
+
+<style>
+#map {
+  height: 600px;
+  width: 600px;
+}
+</style>
+
+<script>
+//初期マップの設定
+let map
+let marker
+function initMap(){
+  geocoder = new google.maps.Geocoder()
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center:  {lat: 35.6803997, lng:139.7690174},  //東京
+    zoom: 15,
+
+  });
+}
+
+//検索後のマップ作成
+let geocoder
+let aft
+function codeAddress(){
+  let inputAddress = document.getElementById('address').value;
+  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+        //マーカーが複数できないようにする
+        if (aft == true){
+            marker.setMap(null);
+        }
+
+        //新しくマーカーを作成する
+        map.setCenter(results[0].geometry.location);
+            marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location,
+            draggable: true // ドラッグ可能にする
+        });
+
+        //二度目以降か判断
+        aft = true
+
+        //検索した時に緯度経度を入力する
+        document.getElementById('lat').value = results[0].geometry.location.lat();
+        document.getElementById('lng').value = results[0].geometry.location.lng();
+
+        // マーカーのドロップ（ドラッグ終了）時のイベント
+        google.maps.event.addListener( marker, 'dragend', function(ev){
+            // イベントの引数evの、プロパティ.latLngが緯度経度
+            document.getElementById('lat').value = ev.latLng.lat();
+            document.getElementById('lng').value = ev.latLng.lng();
+        });
+    } else {
+      alert('該当する結果がありませんでした：' + status);
+    }
+  });   
+}
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
+    
+
+<%= link_to "安飯一覧に戻る", qols_path %>
+</div>
