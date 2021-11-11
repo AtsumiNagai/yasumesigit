@@ -1,36 +1,35 @@
-<h1>安飯</h1>
-<h3>詳細</h3>
-<div class="qol">
- <p><%= @qol.food %></p>
-  <p><%= @qol.cost %></p>
-  <p><%= @qol.coupon %></p>
-  <p><%= @qol.place %></p>
-  <p><%= image_tag @qol.image_url, size: "250x200" if @qol.image? %></p>
-  <p><%= @qol.created_at %></p>
+<div class="syousai-block">
+ <h3>詳細</h3>
+   <p><%= image_tag @qol.image_url, size: "250x200" if @qol.image? %></p>
+   <p>店名 : <%= @qol.food %></p>
+   <p>値段 : <%= @qol.cost %></p>
+   <p>クーポン内容 : <%= @qol.coupon %></p>
+   <p>アクセス : <%= @qol.place %></p>
+   <p><%= @qol.created_at.to_s(:datetime_jp) %></p>
 
-  <% if user_signed_in? %>
-  <% if current_user.already_liked?(@qol) %>
+    <% if user_signed_in? %>
+    <% if current_user.already_liked?(@qol) %>
       <%= link_to qol_like_path(@qol), method: :delete do %>
         <i class="fas fa-heart"></i><%= @qol.likes.count %>
-      <% end %>
-  <% else %>
-      <%= link_to qol_likes_path(@qol), method: :post do %>
+       <% end %>
+       <% else %>
+       <%= link_to qol_likes_path(@qol), method: :post do %>
         <i class="far fa-heart"></i><%= @qol.likes.count %>
-      <% end %>
-  <% end %>
-<% else %>
-<i class="far fa-heart"></i><%= @qol.likes.count %>
-<% end %>
+       <% end %>
+    <% end %>
+ <% else %>
+   <i class="far fa-heart"></i><%= @qol.likes.count %>
+ <% end %>
 
-</div>
 
-<h2>いいねしたユーザー</h2>
+
+<h3>いいねしたユーザー</h3>
 <% @qol.liked_users.each do |user| %>
   <li><%= user.email %></li>
 <% end %>
 
 <div class="comment-wrapper">
-  <p>コメント一覧</p>
+  <h3><p>コメント一覧</p></h3>
   <% @comments.each do |c| %>
     <div>
       <%= c.user.email unless c.user.blank? %>
@@ -97,7 +96,7 @@
   </script>
   
   <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
-
+</div>
 
   <% if user_signed_in? %>
     <%= form_with(model: [@qol, @comment], local: true) do |f| %>

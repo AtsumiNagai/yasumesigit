@@ -1,7 +1,7 @@
 <div id="loading">
   <div id="loading_box">
     <div class="loading-one animation_loading">
-      <p class="loading-txt">ちょっと待って</p>
+      <p class="loading-txt">ちょっと待ってね</p>
     </div>
   </div>
 </div>
@@ -11,24 +11,33 @@
   <div class="first-block">
    <div class=top_slide>
       <div class=gakusyoku>
-        <%= image_tag 'onigiri.jpg', size:"70×70" %>
+        <%= image_tag 'onigiri8.png', size:"500×500" %>
       </div>
       <div class="wrapper">
+      
           <div class="cols">
+          
             <div class="col" ontouchstart="this.classList.toggle('hover');">
+            
               <div class="container">
 
                   <div class="front">
+                  <h2>一番人気の投稿</h2>
                     <div class="slide">
-                      <%= image_tag 'ラーメン.png' %>
-                      <%= image_tag '肉.png' %>
-                      <%= image_tag '寿司.png' %>
+                    
+                      <%= image_tag 'sample1.jpeg' %>
+                      <%= image_tag 'sample2.jpeg' %>
+                      <%= image_tag 'sample3.jpeg' %>
                     </div>
                   </div>
             
                   <div class="back">
                     <div class="inner">
-                      <p>ラーメン</p>
+                      <h2>Geekラーメン</h2>
+                      <p>値段：７００円</p>
+                      <p>クーポン内容：替え玉無料</p>
+                      <p>アクセス：恵比寿駅徒歩2分</p>
+                      <a href=”https://geek-salon.com/” target=”_blank”>https://geek-salon.com/</a>
                     </div>
                   </div>
 
@@ -41,10 +50,9 @@
 
 <div class="second-block">
 
-  <%= link_to "新規投稿", new_qol_path %>
-
+  
     <div class="box">
-      <h3>投稿を検索</h3>
+      <h2>投稿を検索</h2>
     </div>
 
     <%= form_tag({controller:"qols",action:"index"}, method: :get) do %>
@@ -54,7 +62,7 @@
 
 </div>
 
-<span class="letter" data-letter="投稿一覧">投稿一覧</span>
+<h2>投稿一覧</h2>
 <%= page_entries_info @qols %>
 
 <div class="qols-container">
@@ -70,17 +78,20 @@
 
                 <div class="right-container">
                   <div class="card-media-body">
-                      <%= t.food %>
-                      <%= t.cost %>
-                      <%= t.coupon %>
-                      <%= t.place %>
+                      <p>店名 : <%= t.food %><p>
+                      <p>値段 : <%= t.cost %><p>
+                      <p>クーポン内容 : <%= t.coupon %></p>
+                      <p>アクセス : <%= t.place %></p>
                       <p>住所 : <%= t.address %></p>
                       
-                      <%= t.created_at %>
-
+                      <%= t.created_at.to_s(:datetime_jp) %>
+                   
                       <div class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
+                     
                     　　　<%= link_to "詳細へ", qol_path(t.id) %>
                     　</div>
+                    
+                 
               
                     <% if user_signed_in? %>
                       <% if current_user.already_liked?(t) %>

@@ -11,8 +11,8 @@
 }
 
 .new-block h3{
-  background-color:#eca9a9;
-  color:#FAFAFA;
+  background-color:#f0cbcb;
+  color:#000000;
   text-align: center;
 }
 
@@ -31,18 +31,18 @@
 .new-block .field1 input[type="submit"]{
   margin-top:15px;
   margin-bottom:25px;
-  background-color:#2ABCA7;
+  background-color:#f0cbcb;
   padding: 12px 45px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
-  border: 1px solid #2ABCA7;
+  border: 1px solid #f0cbcb;
   -webkit-transition: .5s;
   transition: .5s;
   display: inline-block;
   cursor: pointer;
   width:30%;
-  color:#fff;
+  color:rgb(0, 0, 0);
 }
 .field1{
   margin: 0 auto;
@@ -50,5 +50,5 @@
 
 
 .new-block .field1 input[type="submit"]:hover {
-  background:#19a08c;
+  background:#ee9191;
 }
